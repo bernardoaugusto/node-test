@@ -12,7 +12,20 @@ describe('Testing todo API', () => {
       .get('/')
       .end(function (err, res) {
         expect(res).to.have.status(200);
+        expect(res.text).to.contain('Soccer');
         done();
       });
   });
+
+  const todo = {data: 'Post a todo item at ' + new Date()};
+  it('should add new todo item the totdoList.txt file sucessfully', (done) => {
+    requester
+      .post('/')
+      .send(todo)
+      .end(function (err, res) {
+        expect(res).to.have.status(201);
+        done();
+      });
+  });
+
 });
